@@ -109,15 +109,22 @@ gameManager.AddGame(ExampleGame())
 print("---- This bot was made on top of DougDoug & ddarknut's TwitchPlay's bot")
 print("---- This bot is open source and free to use")
 print("---- This bot was reworked by GrimOfDoom")
+print("\n")
+input("Press Enter to continue...")
 
 
-#!!!!!!!!!!!!!!!! ADD GAME SELECTOR HERE !!!!!!!!!!!!!!!!
-
+# Find which game the user wants to use
 gameManager.GrabGame()
-print(f"The game {gameManager.finalGame.name} was selected, and contains the following commands:")
 
+
+
+#Display the selected game and its commands just in case
+print(f"The game {gameManager.finalGame.name} was selected, and contains the following commands:")
 for i in gameManager.finalGame.commands:
     print(f"[{gameManager.finalGame.commands[i].call}] - {gameManager.finalGame.commands[i].name}")
+input("Press Enter to continue...")
+
+
 
 # An optional count down before starting, so you have time to load up the game
 countdown = 10
@@ -128,21 +135,20 @@ while countdown > 0:
 
 
 
+
+##########################################################
+#                     TWITCH CONNECTION STARTS
+
 t = TwitchPlays_Connection.Twitch();
 t.twitch_connect(TWITCH_CHANNEL);
 
+# Define how messages from chat are handled
 def handle_message(message):
     try:
         msg = message['message'].lower()
         username = message['username'].lower()
 
         print("Got the message: [" + msg + "] from user [" + username + "]")
-
-        # Now that you have a chat message, this is where you add your game logic.
-        # Use the "HoldKey(KEYCODE)" function to press and hold down a keyboard key.
-        # Use the "ReleaseKey(KEYCODE)" function to release a specific keyboard key.
-        # Use the "HoldAndReleaseKey(KEYCODE, SECONDS)" function press down a key for X seconds, then release it.
-        # Use the pydirectinput library to press or move the mouse
 
         # ADDED gameManager to handle chat commands
         gameManager.PerformCommand(msg);
@@ -152,7 +158,7 @@ def handle_message(message):
 
 
 
-# Actual bot
+# Actual bot 
 while True:
 
     active_tasks = [t for t in active_tasks if not t.done()]
