@@ -22,3 +22,7 @@
 # Future Coming Features
  - Swap out the Twitch connection for a different method so that more data can be aggregated from each message
    - With this change, each command can be defined to only run if X points were spent, or only ran for subscribers
+ - Different options to actually perform the command
+   - Aggregate all the commands over X time, and perform the most called one
+   - Limit a command to not be performed for X time after being called
+   - Limit a user to X time before being able to call another command
